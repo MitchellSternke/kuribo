@@ -39,12 +39,12 @@
 			<Add library="opengl32" />
 		</Linker>
 		<Unit filename="source/Main.cpp" />
-		<Unit filename="source/core/game/Game.cpp" />
-		<Unit filename="source/core/game/Game.hpp" />
-		<Unit filename="source/core/game/GameState.cpp" />
-		<Unit filename="source/core/game/GameState.hpp" />
-		<Unit filename="source/core/game/GameStateManager.cpp" />
-		<Unit filename="source/core/game/GameStateManager.hpp" />
+		<Unit filename="source/game/Game.cpp" />
+		<Unit filename="source/game/Game.hpp" />
+		<Unit filename="source/game/GameState.cpp" />
+		<Unit filename="source/game/GameState.hpp" />
+		<Unit filename="source/game/GameStateManager.cpp" />
+		<Unit filename="source/game/GameStateManager.hpp" />
 		<Extensions>
 			<code_completion />
 			<envvars />

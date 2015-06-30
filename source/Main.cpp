@@ -9,7 +9,7 @@
 #include <SDL2/SDL.h>
 #include <SDL2/SDL_opengl.h>
 
-#include "core/game/Game.hpp"
+#include "game/Game.hpp"
 
 #define WINDOW_RESOLUTION_X 1024
 #define WINDOW_RESOLUTION_Y 768
