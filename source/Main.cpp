@@ -9,6 +9,8 @@
 #include <SDL2/SDL.h>
 #include <SDL2/SDL_opengl.h>
 
+#include "core/game/Game.hpp"
+
 #define WINDOW_RESOLUTION_X 1024
 #define WINDOW_RESOLUTION_Y 768
 
@@ -73,6 +75,11 @@ int main( int argc, char** argv )
 			std::cout << "initialize() failed\n";
 			cleanup();
 			return -1;
+		}
+		else
+		{
+			Game game;
+			game.run();
 		}
 	}
 	catch( std::exception& e )
