@@ -5,6 +5,7 @@
 #include <set>
 
 class GameState;
+class GraphicsSystem;
 
 /**
  * Manages the execution of different game states.
@@ -32,7 +33,7 @@ public:
 	/**
 	 * Render the current state.
 	 */
-	void render() const;
+	void render( GraphicsSystem& graphicsSystem ) const;
 
 	/**
 	 * Update the current state by one frame.

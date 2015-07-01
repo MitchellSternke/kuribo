@@ -17,12 +17,15 @@ void Game::run()
 {
 	while( !inputSystem.shutdownReceived() && gameStateManager.isRunning() )
 	{
+		// Render
 		graphicsSystem.clearScreen();
-		gameStateManager.render();
+		gameStateManager.render(graphicsSystem);
 		graphicsSystem.updateScreen();
 
+		// Handle input
 		inputSystem.update();
 
+		// Do logic updates
 		gameStateManager.update();
 	}
 }

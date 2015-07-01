@@ -31,12 +31,12 @@ void GameStateManager::pushState( GameState* state )
 	stateStack.push_back(state);
 }
 
-void GameStateManager::render() const
+void GameStateManager::render( GraphicsSystem& graphicsSystem ) const
 {
 	if( !stateStack.empty() )
 	{
 		GameState* state = stateStack.back();
-		state->onRender();
+		state->onRender(graphicsSystem);
 	}
 }
 

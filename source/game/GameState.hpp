@@ -2,6 +2,7 @@
 #define GAMESTATE_HPP
 
 class GameStateManager;
+class GraphicsSystem;
 
 /**
  * A state of execution in the game.
@@ -17,7 +18,7 @@ protected:
 	/**
 	 * Called whenever this state is requested to render itself to the screen.
 	 */
-	virtual void onRender() const =0;
+	virtual void onRender( GraphicsSystem& graphicsSystem ) const =0;
 
 	/**
 	 * Called once per frame to have the state update itself and perform any logic.
