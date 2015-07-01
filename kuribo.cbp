@@ -45,6 +45,9 @@
 		<Unit filename="source/game/GameState.hpp" />
 		<Unit filename="source/game/GameStateManager.cpp" />
 		<Unit filename="source/game/GameStateManager.hpp" />
+		<Unit filename="source/graphics/GraphicsSystem.hpp" />
+		<Unit filename="source/graphics/sdl2/Sdl2GraphicsSystem.cpp" />
+		<Unit filename="source/graphics/sdl2/Sdl2GraphicsSystem.hpp" />
 		<Unit filename="source/input/InputSystem.hpp" />
 		<Unit filename="source/input/sdl2/Sdl2InputSystem.cpp" />
 		<Unit filename="source/input/sdl2/Sdl2InputSystem.hpp" />
