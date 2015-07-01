@@ -3,6 +3,8 @@
 
 #include "GameStateManager.hpp"
 
+class InputSystem;
+
 /**
  * Controls the flow of logic and manages various subsystems for the application.
  */
@@ -12,7 +14,7 @@ public:
 	/**
 	 * Initialize the game.
 	 */
-	Game();
+	Game( InputSystem& inputSystem );
 
 	/**
 	 * Free all resources used by the game.
@@ -26,6 +28,7 @@ public:
 
 private:
 	GameStateManager gameStateManager;
+	InputSystem& inputSystem;
 };
 
 #endif // GAME_HPP

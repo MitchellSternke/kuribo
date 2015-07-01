@@ -10,6 +10,7 @@
 #include <SDL2/SDL_opengl.h>
 
 #include "game/Game.hpp"
+#include "input/sdl2/Sdl2InputSystem.hpp"
 
 #define WINDOW_RESOLUTION_X 1024
 #define WINDOW_RESOLUTION_Y 768
@@ -78,7 +79,11 @@ int main( int argc, char** argv )
 		}
 		else
 		{
-			Game game;
+			// Initialize subsystems
+			Sdl2InputSystem inputSystem;
+
+			// Run the game
+			Game game(inputSystem);
 			game.run();
 		}
 	}

@@ -1,6 +1,9 @@
 #include "Game.hpp"
 
-Game::Game()
+#include "../input/InputSystem.hpp"
+
+Game::Game( InputSystem& inputSystem ) :
+	inputSystem(inputSystem)
 {
 }
 
@@ -10,9 +13,12 @@ Game::~Game()
 
 void Game::run()
 {
-	while( gameStateManager.isRunning() )
+	while( !inputSystem.shutdownReceived() && gameStateManager.isRunning() )
 	{
 		gameStateManager.render();
+
+		inputSystem.update();
+
 		gameStateManager.update();
 	}
 }
