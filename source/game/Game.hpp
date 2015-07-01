@@ -3,6 +3,7 @@
 
 #include "GameStateManager.hpp"
 
+class GraphicsSystem;
 class InputSystem;
 
 /**
@@ -14,7 +15,7 @@ public:
 	/**
 	 * Initialize the game.
 	 */
-	Game( InputSystem& inputSystem );
+	Game( GraphicsSystem& graphicsSystem, InputSystem& inputSystem );
 
 	/**
 	 * Free all resources used by the game.
@@ -28,6 +29,7 @@ public:
 
 private:
 	GameStateManager gameStateManager;
+	GraphicsSystem& graphicsSystem;
 	InputSystem& inputSystem;
 };
 

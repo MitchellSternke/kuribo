@@ -10,10 +10,14 @@
 #include <SDL2/SDL_opengl.h>
 
 #include "game/Game.hpp"
+#include "graphics/sdl2/Sdl2GraphicsSystem.hpp"
 #include "input/sdl2/Sdl2InputSystem.hpp"
 
 #define WINDOW_RESOLUTION_X 1024
 #define WINDOW_RESOLUTION_Y 768
+
+#define SCREEN_RESOLUTION_X 256
+#define SCREEN_RESOLUTION_Y 224
 
 static SDL_Window* window = NULL;
 
@@ -80,10 +84,11 @@ int main( int argc, char** argv )
 		else
 		{
 			// Initialize subsystems
+			Sdl2GraphicsSystem graphicsSystem( window, SCREEN_RESOLUTION_X, SCREEN_RESOLUTION_Y );
 			Sdl2InputSystem inputSystem;
 
 			// Run the game
-			Game game(inputSystem);
+			Game game(graphicsSystem, inputSystem);
 			game.run();
 		}
 	}
