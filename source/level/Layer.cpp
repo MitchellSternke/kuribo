@@ -5,10 +5,10 @@
 #include "Layer.hpp"
 
 Layer::Layer( int width, int height ) :
-	width(width),
-	height(height),
 	xPosition(0.0f),
-	yPosition(0.0f)
+	yPosition(0.0f),
+	width(width),
+	height(height)
 {
 	blocks.resize(width * height, nullptr);
 }
