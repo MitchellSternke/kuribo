@@ -26,8 +26,7 @@ public:
 	virtual ~Layer();
 
 	/**
-	 * Add a block to the layer. If the block does not have a tile within
-	 * the layer's bounds, it will be freed.
+	 * Add a block to the layer.
 	 */
 	void addBlock( int x, int y, Block* block );
 
@@ -57,6 +56,8 @@ private:
 	int width;
 	int height;
 	std::vector<Block*> blocks;
+
+	void insertBlock( Block* block );
 };
 
 #endif // LAYER_HPP

@@ -51,7 +51,9 @@
 		<Unit filename="source/input/InputSystem.hpp" />
 		<Unit filename="source/input/sdl2/Sdl2InputSystem.cpp" />
 		<Unit filename="source/input/sdl2/Sdl2InputSystem.hpp" />
+		<Unit filename="source/level/Block.cpp" />
 		<Unit filename="source/level/Block.hpp" />
+		<Unit filename="source/level/Layer.cpp" />
 		<Unit filename="source/level/Layer.hpp" />
 		<Unit filename="source/level/Level.hpp" />
 		<Unit filename="source/level/Sprite.hpp" />
