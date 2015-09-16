@@ -51,11 +51,22 @@ private:
 	void moveLayerLeft( Layer* layer );
 	void moveLayerRight( Layer* layer );
 	void moveLayerUp( Layer* layer );
+	void moveSpriteDown( Sprite* sprite );
+	void moveSpriteLeft( Sprite* sprite );
+	void moveSpriteRight( Sprite* sprite );
+	void moveSpriteUp( Sprite* sprite );
+	bool tryMoveSpriteDown( Sprite* sprite );
+	bool tryMoveSpriteLeft( Sprite* sprite );
+	bool tryMoveSpriteRight( Sprite* sprite );
+	bool tryMoveSpriteUp( Sprite* sprite );
 	void updateLayer(Layer* layer);
 	void updateLayers();
 	void updateLayerXMotion( Layer* layer );
 	void updateLayerYMotion( Layer* layer );
+	void updateSprite( Sprite* sprite );
 	void updateSprites();
+	void updateSpriteXMotion( Sprite* sprite );
+	void updateSpriteYMotion( Sprite* sprite );
 };
 
 #endif // LEVEL_HPP

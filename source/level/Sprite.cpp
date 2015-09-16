@@ -1,3 +1,5 @@
+#include <cmath>
+
 #include "Sprite.hpp"
 
 Sprite::Sprite() :
@@ -8,4 +10,14 @@ Sprite::Sprite() :
 	xAcceleration(0.0f),
 	yAcceleration(0.0f)
 {
+}
+
+int Sprite::getX() const
+{
+	return static_cast<int>(std::floor(xPosition));
+}
+
+int Sprite::getY() const
+{
+	return static_cast<int>(std::floor(yPosition));
 }

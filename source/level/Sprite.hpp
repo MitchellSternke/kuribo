@@ -11,6 +11,16 @@ public:
 	Sprite();
 	virtual ~Sprite() {}
 
+	/**
+	 * Get the x position of the sprite, in pixels.
+	 */
+	int getX() const;
+
+	/**
+	 * Get the y position of the sprite, in pixels.
+	 */
+	int getY() const;
+
 protected:
 	/**
 	 * Called every frame for the sprite to do any update logic.
@@ -24,6 +34,8 @@ private:
 	float yVelocity;
 	float xAcceleration;
 	float yAcceleration;
+	int width;
+	int height;
 };
 
 #endif // SPRITE_HPP
