@@ -45,6 +45,10 @@
 		<Unit filename="source/game/GameState.hpp" />
 		<Unit filename="source/game/GameStateManager.cpp" />
 		<Unit filename="source/game/GameStateManager.hpp" />
+		<Unit filename="source/gamestates/InitialState.cpp" />
+		<Unit filename="source/gamestates/InitialState.hpp" />
+		<Unit filename="source/gamestates/LevelState.cpp" />
+		<Unit filename="source/gamestates/LevelState.hpp" />
 		<Unit filename="source/graphics/GraphicsSystem.hpp" />
 		<Unit filename="source/graphics/sdl2/Sdl2GraphicsSystem.cpp" />
 		<Unit filename="source/graphics/sdl2/Sdl2GraphicsSystem.hpp" />
@@ -55,7 +59,9 @@
 		<Unit filename="source/level/Block.hpp" />
 		<Unit filename="source/level/Layer.cpp" />
 		<Unit filename="source/level/Layer.hpp" />
+		<Unit filename="source/level/Level.cpp" />
 		<Unit filename="source/level/Level.hpp" />
+		<Unit filename="source/level/Sprite.cpp" />
 		<Unit filename="source/level/Sprite.hpp" />
 		<Extensions>
 			<code_completion />

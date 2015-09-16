@@ -15,7 +15,7 @@ enum InputButton
 	BUTTON_START
 };
 
-#define NUM_BUTTONS 7 /**< The number of buttons defined for the input controller. */
+constexpr int NUM_BUTTONS = 7; /**< The number of buttons defined for the input controller. */
 
 /**
  * Interface for receiving input from the user.

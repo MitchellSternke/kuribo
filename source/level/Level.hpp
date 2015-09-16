@@ -46,6 +46,16 @@ public:
 private:
 	std::list<Layer*> layers;
 	std::list<Sprite*> sprites;
+
+	void moveLayerDown( Layer* layer );
+	void moveLayerLeft( Layer* layer );
+	void moveLayerRight( Layer* layer );
+	void moveLayerUp( Layer* layer );
+	void updateLayer(Layer* layer);
+	void updateLayers();
+	void updateLayerXMotion( Layer* layer );
+	void updateLayerYMotion( Layer* layer );
+	void updateSprites();
 };
 
 #endif // LEVEL_HPP

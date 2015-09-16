@@ -18,7 +18,7 @@ protected:
 	/**
 	 * Called whenever this state is requested to render itself to the screen.
 	 */
-	virtual void onRender( GraphicsSystem& graphicsSystem ) const =0;
+	virtual void onRender( GraphicsSystem& graphics ) const =0;
 
 	/**
 	 * Called once per frame to have the state update itself and perform any logic.

@@ -1,6 +1,8 @@
 #ifndef BLOCK_HPP
 #define BLOCK_HPP
 
+constexpr int BLOCK_SIZE = 16; /**< The size of a unit block, in pixels. */
+
 /**
  * A tiled object that makes up the terrain of a level.
  */

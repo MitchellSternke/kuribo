@@ -41,6 +41,16 @@ public:
 	const Block* getBlock( int x, int y ) const;
 
 	/**
+	 * Get the block located at a pixel in the layer, taking into account the layer's position.
+	 */
+	Block* getBlockAtPixel( int x, int y );
+
+	/**
+	 * Get the block located at a pixel in the layer, taking into account the layer's position.
+	 */
+	const Block* getBlockAtPixel( int x, int y ) const;
+
+	/**
 	 * Get the layer's x position, in pixels.
 	 */
 	int getX() const;
@@ -50,9 +60,17 @@ public:
 	 */
 	int getY() const;
 
+protected:
+	/**
+	 * Called once per frame to perform logic.
+	 */
+	virtual void onUpdate() {}
+
 private:
 	float xPosition;
 	float yPosition;
+	float xVelocity;
+	float yVelocity;
 	int width;
 	int height;
 	std::vector<Block*> blocks;

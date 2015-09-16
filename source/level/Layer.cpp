@@ -7,6 +7,8 @@
 Layer::Layer( int width, int height ) :
 	xPosition(0.0f),
 	yPosition(0.0f),
+	xVelocity(0.0f),
+	yVelocity(0.0f),
 	width(width),
 	height(height)
 {
@@ -67,6 +69,32 @@ const Block* Layer::getBlock( int x, int y ) const
 	return blocks[y * width + x];
 }
 
+Block* Layer::getBlockAtPixel( int x, int y )
+{
+	// Convert coordinates to local coordinates
+	x -= getX();
+	y -= getY();
+	if( x < 0 || y < 0 )
+	{
+		return nullptr;
+	}
+
+	return getBlock(x / BLOCK_SIZE, y / BLOCK_SIZE);
+}
+
+const Block* Layer::getBlockAtPixel( int x, int y ) const
+{
+	// Convert coordinates to local coordinates
+	x -= getX();
+	y -= getY();
+	if( x < 0 || y < 0 )
+	{
+		return nullptr;
+	}
+
+	return getBlock(x / BLOCK_SIZE, y / BLOCK_SIZE);
+}
+
 int Layer::getX() const
 {
 	return static_cast<int>(std::floor(xPosition));
@@ -83,12 +111,14 @@ void Layer::insertBlock( Block* block )
 	{
 		for( int x = 0; x < block->getWidth(); x++ )
 		{
-			if( x < 0 || x >= width || y < 0 || y >= height )
+			int bx = x + block->xPosition;
+			int by = y + block->yPosition;
+			if( bx < 0 || bx >= width || by < 0 || by >= height )
 			{
 				continue;
 			}
 
-			blocks[y * width + x] = block;
+			blocks[by * width + bx] = block;
 		}
 	}
 }
