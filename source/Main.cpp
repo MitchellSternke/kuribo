@@ -64,6 +64,9 @@ static int initialize()
 		return -1;
 	}
 
+	// Enable vsync
+	SDL_GL_SetSwapInterval(1);
+
 	return 0;
 }
 
