@@ -51,10 +51,10 @@ private:
 	void moveLayerLeft( Layer* layer );
 	void moveLayerRight( Layer* layer );
 	void moveLayerUp( Layer* layer );
-	void moveSpriteDown( Sprite* sprite );
-	void moveSpriteLeft( Sprite* sprite );
-	void moveSpriteRight( Sprite* sprite );
-	void moveSpriteUp( Sprite* sprite );
+	bool moveSpriteDown( Sprite* sprite );
+	bool moveSpriteLeft( Sprite* sprite );
+	bool moveSpriteRight( Sprite* sprite );
+	bool moveSpriteUp( Sprite* sprite );
 	bool tryMoveSpriteDown( Sprite* sprite );
 	bool tryMoveSpriteLeft( Sprite* sprite );
 	bool tryMoveSpriteRight( Sprite* sprite );

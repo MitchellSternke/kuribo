@@ -19,10 +19,20 @@ Level::Level()
 	layer->yVelocity = -0.125f;
 	addLayer(layer);
 
+	layer = new Layer(256, 14);
+	for( int y = 0; y < 14; y++ )
+	{
+		layer->addBlock(12, y, new Block());
+	}
+	layer->xVelocity = -0.5f;
+	addLayer(layer);
+
 	Sprite* sprite = new Sprite();
 	sprite->width = 16;
 	sprite->height = 16;
-	sprite->xVelocity = 0.125f;
+	sprite->xVelocity = 0.5f;
+	sprite->yVelocity = 0.5f;
+	sprite->yAcceleration = 0.05f;
 	addSprite(sprite);
 }
 
@@ -54,53 +64,113 @@ void Level::addSprite( Sprite* sprite )
 void Level::moveLayerDown( Layer* layer )
 {
 	layer->yPosition++;
+
+	// Move any sprites that are colliding with this layer
+	for( auto sprite : sprites )
+	{
+		for( int x = 0; x < sprite->width; x++ )
+		{
+			if( layer->getBlockAtPixel(sprite->getX() + x, sprite->getY()) != nullptr )
+			{
+				moveSpriteDown(sprite);
+				break;
+			}
+		}
+	}
 }
 
 void Level::moveLayerLeft( Layer* layer )
 {
 	layer->xPosition--;
+
+	// Move any sprites that are colliding with this layer
+	for( auto sprite : sprites )
+	{
+		for( int y = 0; y < sprite->height; y++ )
+		{
+			if( layer->getBlockAtPixel(sprite->getX() + sprite->width - 1, sprite->getY() + y) != nullptr )
+			{
+				moveSpriteLeft(sprite);
+				break;
+			}
+		}
+	}
 }
 
 void Level::moveLayerRight( Layer* layer )
 {
 	layer->xPosition++;
+
+	// Move any sprites that are colliding with this layer
+	for( auto sprite : sprites )
+	{
+		for( int y = 0; y < sprite->height; y++ )
+		{
+			if( layer->getBlockAtPixel(sprite->getX(), sprite->getY() + y) != nullptr )
+			{
+				moveSpriteRight(sprite);
+				break;
+			}
+		}
+	}
 }
 
 void Level::moveLayerUp( Layer* layer )
 {
 	layer->yPosition--;
+
+	// Move any sprites that are colliding with this layer
+	for( auto sprite : sprites )
+	{
+		for( int x = 0; x < sprite->width; x++ )
+		{
+			if( layer->getBlockAtPixel(sprite->getX() + x, sprite->getY() + sprite->height - 1) != nullptr )
+			{
+				moveSpriteUp(sprite);
+				break;
+			}
+		}
+	}
 }
 
-void Level::moveSpriteDown( Sprite* sprite )
+bool Level::moveSpriteDown( Sprite* sprite )
 {
 	if( tryMoveSpriteDown(sprite) )
 	{
 		sprite->yPosition++;
+		return true;
 	}
+	return false;
 }
 
-void Level::moveSpriteLeft( Sprite* sprite )
+bool Level::moveSpriteLeft( Sprite* sprite )
 {
 	if( tryMoveSpriteLeft(sprite) )
 	{
 		sprite->xPosition--;
+		return true;
 	}
+	return false;
 }
 
-void Level::moveSpriteRight( Sprite* sprite )
+bool Level::moveSpriteRight( Sprite* sprite )
 {
 	if( tryMoveSpriteRight(sprite) )
 	{
 		sprite->xPosition++;
+		return true;
 	}
+	return false;
 }
 
-void Level::moveSpriteUp( Sprite* sprite )
+bool Level::moveSpriteUp( Sprite* sprite )
 {
 	if( tryMoveSpriteUp( sprite ) )
 	{
 		sprite->yPosition--;
+		return true;
 	}
+	return false;
 }
 
 void Level::render( GraphicsSystem& graphics, int left, int right, int top, int bottom ) const
@@ -142,25 +212,73 @@ void Level::render( GraphicsSystem& graphics, int left, int right, int top, int 
 
 bool Level::tryMoveSpriteDown( Sprite* sprite )
 {
-	// TODO: implement
+	// Check for blocks below
+	for( auto layer : layers )
+	{
+		for( int x = 0; x < sprite->width; x++ )
+		{
+			auto block = layer->getBlockAtPixel(sprite->getX() + x, sprite->getY() + sprite->height);
+			if( block != nullptr )
+			{
+				return false;
+			}
+		}
+	}
+
 	return true;
 }
 
 bool Level::tryMoveSpriteLeft( Sprite* sprite )
 {
-	// TODO: implement
+	// Check for blocks to the left
+	for( auto layer : layers )
+	{
+		for( int y = 0; y < sprite->height; y++ )
+		{
+			auto block = layer->getBlockAtPixel(sprite->getX() - 1, sprite->getY() + y);
+			if( block != nullptr )
+			{
+				return false;
+			}
+		}
+	}
+
 	return true;
 }
 
 bool Level::tryMoveSpriteRight( Sprite* sprite )
 {
-	// TODO: implement
+	// Check for blocks to the right
+	for( auto layer : layers )
+	{
+		for( int y = 0; y < sprite->height; y++ )
+		{
+			auto block = layer->getBlockAtPixel(sprite->getX() + sprite->width, sprite->getY() + y);
+			if( block != nullptr )
+			{
+				return false;
+			}
+		}
+	}
+
 	return true;
 }
 
 bool Level::tryMoveSpriteUp( Sprite* sprite )
 {
-	// TODO: implement
+	// Check for blocks above
+	for( auto layer : layers )
+	{
+		for( int x = 0; x < sprite->width; x++ )
+		{
+			auto block = layer->getBlockAtPixel(sprite->getX() + x, sprite->getY() - 1);
+			if( block != nullptr )
+			{
+				return false;
+			}
+		}
+	}
+
 	return true;
 }
 
@@ -285,12 +403,21 @@ void Level::updateSprites()
 
 void Level::updateSpriteXMotion( Sprite* sprite )
 {
+	sprite->xVelocity += sprite->xAcceleration;
+
 	// Move left/right one pixel at a time
 	float xVelocity = sprite->xVelocity;
 	while( xVelocity >= 1.0f )
 	{
-		moveSpriteRight(sprite);
-		xVelocity--;
+		if( moveSpriteRight(sprite) )
+		{
+			xVelocity--;
+		}
+		else
+		{
+			sprite->xVelocity = 0.0f;
+			return;
+		}
 	}
 	if( xVelocity > 0.0f )
 	{
@@ -299,6 +426,11 @@ void Level::updateSpriteXMotion( Sprite* sprite )
 			if( tryMoveSpriteRight(sprite) )
 			{
 				sprite->xPosition += xVelocity;
+			}
+			else
+			{
+				sprite->xVelocity = 0.0f;
+				return;
 			}
 		}
 		else
@@ -309,8 +441,15 @@ void Level::updateSpriteXMotion( Sprite* sprite )
 	}
 	while( xVelocity <= -1.0f )
 	{
-		moveSpriteLeft(sprite);
-		xVelocity++;
+		if( moveSpriteLeft(sprite) )
+		{
+			xVelocity++;
+		}
+		else
+		{
+			sprite->xVelocity = 0.0f;
+			return;
+		}
 	}
 	if( xVelocity < 0.0f )
 	{
@@ -320,6 +459,11 @@ void Level::updateSpriteXMotion( Sprite* sprite )
 			{
 				sprite->xPosition += xVelocity;
 			}
+			else
+			{
+				sprite->xVelocity = 0.0f;
+				return;
+			}
 		}
 		sprite->xPosition += xVelocity;
 		xVelocity = 0.0f;
@@ -328,12 +472,21 @@ void Level::updateSpriteXMotion( Sprite* sprite )
 
 void Level::updateSpriteYMotion( Sprite* sprite )
 {
+	sprite->yVelocity += sprite->yAcceleration;
+
 	// Move up/down one pixel at a time
 	float yVelocity = sprite->yVelocity;
 	while( yVelocity >= 1.0f )
 	{
-		moveSpriteDown(sprite);
-		yVelocity--;
+		if( moveSpriteDown(sprite) )
+		{
+			yVelocity--;
+		}
+		else
+		{
+			sprite->yVelocity = 0.0f;
+			return;
+		}
 	}
 	if( yVelocity > 0.0f )
 	{
@@ -342,6 +495,11 @@ void Level::updateSpriteYMotion( Sprite* sprite )
 			if( tryMoveSpriteDown(sprite) )
 			{
 				sprite->yPosition += yVelocity;
+			}
+			else
+			{
+				sprite->yVelocity = 0.0f;
+				return;
 			}
 		}
 		else
@@ -352,8 +510,15 @@ void Level::updateSpriteYMotion( Sprite* sprite )
 	}
 	while( yVelocity <= -1.0f )
 	{
-		moveSpriteUp(sprite);
-		yVelocity++;
+		if( moveSpriteUp(sprite) )
+		{
+			yVelocity++;
+		}
+		else
+		{
+			sprite->yVelocity = 0.0f;
+			return;
+		}
 	}
 	if( yVelocity < 0.0f )
 	{
@@ -362,6 +527,11 @@ void Level::updateSpriteYMotion( Sprite* sprite )
 			if( tryMoveSpriteUp(sprite) )
 			{
 				sprite->yPosition += yVelocity;
+			}
+			else
+			{
+				sprite->yVelocity = 0.0f;
+				return;
 			}
 		}
 		sprite->yPosition += yVelocity;
