@@ -47,14 +47,19 @@ private:
 	std::list<Layer*> layers;
 	std::list<Sprite*> sprites;
 
+	bool isSpriteStandingOnLayer( const Layer* layer, const Sprite* sprite ) const;
 	void moveLayerDown( Layer* layer );
 	void moveLayerLeft( Layer* layer );
 	void moveLayerRight( Layer* layer );
 	void moveLayerUp( Layer* layer );
 	bool moveSpriteDown( Sprite* sprite );
+	void moveSpriteDown( Sprite* sprite, float dy );
 	bool moveSpriteLeft( Sprite* sprite );
+	void moveSpriteLeft( Sprite* sprite, float dx );
 	bool moveSpriteRight( Sprite* sprite );
+	void moveSpriteRight( Sprite* sprite, float dx );
 	bool moveSpriteUp( Sprite* sprite );
+	void moveSpriteUp( Sprite* sprite, float dy );
 	bool tryMoveSpriteDown( Sprite* sprite );
 	bool tryMoveSpriteLeft( Sprite* sprite );
 	bool tryMoveSpriteRight( Sprite* sprite );

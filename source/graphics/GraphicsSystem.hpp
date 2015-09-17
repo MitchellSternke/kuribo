@@ -27,6 +27,16 @@ public:
 	virtual void drawRectangle( int x, int y, int width, int height )=0;
 
 	/**
+	 * Draw a bordered rectangle. The border will be white.
+	 *
+	 * @param x the x coordinate.
+	 * @param y the y coordinate.
+	 * @param width the width of the rectangle, in pixels.
+	 * @param height the height of the rectangle, in pixels.
+	 */
+	virtual void drawRectangleBordered( int x, int y, int width, int height )=0;
+
+	/**
 	 * Get the height of the virtual screen, in pixels.
 	 */
 	virtual int getScreenHeight() const =0;

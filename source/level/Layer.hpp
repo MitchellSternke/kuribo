@@ -51,6 +51,11 @@ public:
 	const Block* getBlockAtPixel( int x, int y ) const;
 
 	/**
+	 * Get the collision type of a given pixel in the layer, taking into account the layer's position.
+	 */
+	int getCollisionTypeAtPixel( int x, int y ) const;
+
+	/**
 	 * Get the layer's x position, in pixels.
 	 */
 	int getX() const;

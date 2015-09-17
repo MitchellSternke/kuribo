@@ -23,7 +23,21 @@ void Sdl2GraphicsSystem::clearScreen()
 
 void Sdl2GraphicsSystem::drawRectangle( int x, int y, int width, int height )
 {
+	glColor3ub(colorR, colorG, colorB);
 	glBegin(GL_QUADS);
+		glVertex2i(x, y);
+		glVertex2i(x + width, y);
+		glVertex2i(x + width, y + height);
+		glVertex2i(x, y + height);
+	glEnd();
+}
+
+void Sdl2GraphicsSystem::drawRectangleBordered( int x, int y, int width, int height )
+{
+	drawRectangle(x, y, width, height);
+
+	glColor3f(1.0f, 1.0f, 1.0f);
+	glBegin(GL_LINE_LOOP);
 		glVertex2i(x, y);
 		glVertex2i(x + width, y);
 		glVertex2i(x + width, y + height);
@@ -43,7 +57,9 @@ int Sdl2GraphicsSystem::getScreenWidth() const
 
 void Sdl2GraphicsSystem::setColor( uint8_t r, uint8_t g, uint8_t b )
 {
-	glColor3ub(r, g, b);
+	colorR = r;
+	colorG = g;
+	colorB = b;
 }
 
 void Sdl2GraphicsSystem::updateScreen()

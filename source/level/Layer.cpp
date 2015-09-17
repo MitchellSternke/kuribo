@@ -95,6 +95,22 @@ const Block* Layer::getBlockAtPixel( int x, int y ) const
 	return getBlock(x / BLOCK_SIZE, y / BLOCK_SIZE);
 }
 
+int Layer::getCollisionTypeAtPixel( int x, int y ) const
+{
+	auto block = getBlockAtPixel(x, y);
+	if( block == nullptr )
+	{
+		return 0;
+	}
+
+	// Translate to local coordinates
+	x -= getX();
+	y -= getY();
+
+	// Translate to block coordinates
+	return block->getCollisionTypeAtPixel(x - block->getX() * BLOCK_SIZE, y - block->getY() * BLOCK_SIZE);
+}
+
 int Layer::getX() const
 {
 	return static_cast<int>(std::floor(xPosition));

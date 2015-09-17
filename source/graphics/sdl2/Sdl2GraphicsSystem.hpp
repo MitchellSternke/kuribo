@@ -22,6 +22,7 @@ public:
 
 	void clearScreen();
 	void drawRectangle( int x, int y, int width, int height );
+	void drawRectangleBordered( int x, int y, int width, int height );
 	int getScreenHeight() const;
 	int getScreenWidth() const;
 	void setColor( uint8_t r, uint8_t g, uint8_t b );
@@ -31,6 +32,9 @@ private:
 	SDL_Window* window;
 	int screenWidth;
 	int screenHeight;
+	uint8_t colorR;
+	uint8_t colorG;
+	uint8_t colorB;
 };
 
 #endif // SDL2GRAPHICSSYSTEM_HPP
